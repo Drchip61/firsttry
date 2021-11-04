@@ -179,22 +179,63 @@ ZeroDivisionError: 除数不能为零
 ```
 
 * 配合try主动引发异常
+raise 语句引发的异常通常用 try except（else finally）异常处理结构来捕获并进行处理。
+使用 raise 语句引发异常，程序的执行是正常的，手动抛出的异常并不会导致程序崩溃。
   * 示例：
+  ```bash
+  try:
+    num1 = int(input('输入一个被除数 num1：'))  # 用户输入一个被除数
+    num2 = int(input('输入一个除数 num2：'))  # 用户输入一个除数
+    result = num1 / num2
+    # 判断用户输入的除数是否为零
+    if (num2 == 0):
+        raise ZeroDivisionError
+except ZeroDivisionError as e:
+    print('引发异常：', repr(e))
+
+```
+* 运行结果：
+```bash
+输入一个被除数 num1：6
+输入一个被除数 num2：0
+引发异常： ZeroDivisionError('division by zero')
+```
 * 自定义异常
+你可以通过创建一个新的异常类来拥有自己的异常。异常类继承自 Exception 类，可以直接继承，或者间接继承，例如：
+```bash
+class MyError(Exception):
+   def __init__(self, value):
+       self.value = value
+       return repr(self.value)
+   # raise MyError('oops!')
+   print('My exception occurred, value:', e.value)
+```
 
 ### 4. assert用法
 
-- Run the train script on synapse dataset. The batch size can be reduced to 12 or 6 to save memory (please also decrease the base_lr linearly), and both can reach similar performance.
+设想一个情况，我们的代码中包含数据读取和数据处理的部分，其中数据处理需要GPU计算，而数据读取也需要大量时间，甚至读取数据之后还需要进一步的处理，如果我们在处理完之后才发现GPU不可用，就大大降低了效率，故而需要一种提前判断的方式去解决此问题。
 
+因此我们提出断言assert！
+
+Python assert（断言）用于判断一个表达式，在表达式条件为 false 的时候触发异常。
+断言可以在条件不满足程序运行的情况下直接返回错误，而不必等待程序运行后出现崩溃的情况。
+
+
+assert语法：
 ```bash
-CUDA_VISIBLE_DEVICES=0 python train.py --dataset Synapse --vit_name R50-ViT-B_16
+assert expression
 ```
-
-- Run the test script on synapse dataset. It supports testing for both 2D images and 3D volumes.
-
+等价于：
 ```bash
-python test.py --dataset Synapse --vit_name R50-ViT-B_16
+if not expression:
+    raise AssertionError(arguments)
 ```
+实例：
+```bash
+import torch
+assert (torch.cuda.is_available()), "本机器需要有可用的GPU才能运行此代码！"
+```
+### 5.Traceback用法
 
 ## Reference
 * [Google ViT](https://github.com/google-research/vision_transformer)
