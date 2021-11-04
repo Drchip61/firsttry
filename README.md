@@ -140,17 +140,21 @@ for j in range(len(dir2)):#这里是打开一个文件夹读取里面很多文�
 
 ### 3. raise用法
 * raise语法格式
+
 ```bash
 raise [exceptionName[(reason)]]
 ```
+
 等价于
+
 ```bash
 raise  # 该语句引发当前上下文中捕获的异常（比如在 except 块中），或默认引发 RuntimeError 异常。
 raise exceptionName  # 表示引发执行类型的异常。
 raise exceptionName(reason)   # 在引发指定类型的异常的同时，附带异常的描述信息。
 ```
+
 举例1：无参数raise
-'''bash
+```bash
 >>> raise
 Traceback (most recent call last):
   File "<pyshell#0>", line 1, in <module>
