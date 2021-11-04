@@ -1,7 +1,4 @@
 # python异常捕获与处理
-This repo holds code for [Sktr:Skip-Transformer Unet]
-
-## 什么是异常
 
 ### 1. 异常简介
 * 异常不是错误
@@ -141,11 +138,47 @@ for j in range(len(dir2)):#这里是打开一个文件夹读取里面很多文�
             corpus.append(wordList)
 ```
 
-### 3. Environment
+### 3. raise用法
+* raise语法格式
+```bash
+raise [exceptionName[(reason)]]
+```
+等价于
+```bash
+raise  # 该语句引发当前上下文中捕获的异常（比如在 except 块中），或默认引发 RuntimeError 异常。
+raise exceptionName  # 表示引发执行类型的异常。
+raise exceptionName(reason)   # 在引发指定类型的异常的同时，附带异常的描述信息。
+```
+举例1：无参数raise
+'''bash
+>>> raise
+Traceback (most recent call last):
+  File "<pyshell#0>", line 1, in <module>
+    raise
+RuntimeError: No active exception to reraise
+```
+举例2：raise exceptionName
+```bash
+>>> raise ZeroDivisionError
+Traceback (most recent call last):
+  File "<pyshell#1>", line 1, in <module>
+    raise ZeroDivisionError
+ZeroDivisionError
+```
+举例3：raise exceptionName（reason）：
+```bash
+>>> raise ZeroDivisionError('除数不能为零')
+Traceback (most recent call last):
+  File "<pyshell#2>", line 1, in <module>
+    raise ZeroDivisionError('除数不能为零')
+ZeroDivisionError: 除数不能为零
+```
 
-Please prepare an environment with python=3.7, and then use the command "pip install -r requirements.txt" for the dependencies.
+* 配合try主动引发异常
+  * 示例：
+* 自定义异常
 
-### 4. Train/Test
+### 4. assert用法
 
 - Run the train script on synapse dataset. The batch size can be reduced to 12 or 6 to save memory (please also decrease the base_lr linearly), and both can reach similar performance.
 
