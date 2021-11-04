@@ -14,12 +14,25 @@ This repo holds code for [Sktr:Skip-Transformer Unet]
 
 当一个未捕获的异常发生时，Python将结束程序并打印一个堆栈跟踪信息，以及异常名和附加信息。具体如下：
 ```bash
-Traceback (most recent call last): &&
-File "<ipython-input-1-0bc85e309fb1>", line 1, in <module> &&
-    min(x,y) &&
+Traceback (most recent call last): 
+File "<ipython-input-1-0bc85e309fb1>", line 1, in <module> 
+    min(x,y) 
 NameError: name 'x' is not defined
 ```
 
+* 异常捕获主要目的
+  * 错误处理：在运行时出现错误的情况下，应用程序可能会无条件终止。使用异常处理，我们可以处理失败的情况并避免程序终止。
+
+  * 代码分离：错误处理可以帮助我们将错误处理所需的代码与主逻辑分离。与错误相关的代码可以放置在“ except ”块中，该块将其与包含应用程序逻辑的常规代码隔离开来。
+
+  * 错误区分：帮助我们隔离执行过程中遇到的不同类型的错误。我们可以有多个“ except”块，每个块处理一种特定类型的错误。
+
+* 异常捕获其他应用
+  * 事件通知：异常也可以作为某种条件的信号，而不需要在程序里传送结果标志或显式地测试它们。
+
+  * 特殊情形处理：有时有些情况是很少发生的，把相应的处理代码改为异常处理会更好一些。
+
+  * 特殊的控制流：异常是一个高层次的”goto”，可以把它作为实现特殊控制流的基础。如反向跟踪等。
 ### 2. Prepare data
 
 Please go to ["./dataset/README.md"](datasets/README.md) for details, or please send an Email to 2981431354@mail.dlut.edu.cn to request the preprocessed data. If you would like to use the preprocessed data, please use it for research purposes and do not redistribute it.
