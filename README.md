@@ -104,9 +104,42 @@ Python自带的异常处理机制非常强大，提供了很多内置异常类�
           -- ResourceWarning  # 与资源使用相关的警告的基类。被默认警告过滤器忽略。
 ```
 
-### 2. Prepare data
+### 2. 异常捕获与处理
 
-Please go to ["./dataset/README.md"](datasets/README.md) for details, or please send an Email to 2981431354@mail.dlut.edu.cn to request the preprocessed data. If you would like to use the preprocessed data, please use it for research purposes and do not redistribute it.
+```bash
+try:
+    执行代码
+except [ (Error1, Error2, ... ) [as e] ]:
+    发生指定error1，2时执行的代码
+except [ (Error3, Error4, ... ) [as e] ]:
+    发生指定error3，4时执行的代码
+except  [Exception]:
+    未发生指定error时执行的代码
+else:
+    没有异常时执行的代码块
+finally:
+    不管有没有异常都会执行的代码块
+```
+
+如果当try后的语句执行时发生异常，Python就从except中提到的指定error中寻找异常处理方式，如果没有指定的就从未指定的异常处理方式中寻找处理方式，异常处理完毕，控制流就通过整个try语句。如果在try子句执行时没有发生异常，Python将执行else语句后的语句（如果有else的话），然后控制流通过整个try语句。finally是一定执行的代码块儿。
+
+* 代码实例：
+```bash
+for j in range(len(dir2)):#这里是打开一个文件夹读取里面很多文档信息，但是文档编码方式不同，故而通过这种方式顺利读取文档信息。
+            # with open('Data/{0}/{1}'.format(dir1[i],dir2[j]),encoding='ISO-8859-1') as f:
+            #     wordList = f.read().strip().replace('','')
+            try:
+                with open('Data/{0}/{1}'.format(dir1[i],dir2[j]),encoding='gbk') as f:
+                    wordList = f.read()
+            except:
+                try:
+                    with open('Data/{0}/{1}'.format(dir1[i], dir2[j]), encoding='utf-8') as f:
+                        wordList = f.read()
+                except:
+                    with open('Data/{0}/{1}'.format(dir1[i], dir2[j]), encoding='gb18030') as f:
+                        wordList = f.read().strip()
+            corpus.append(wordList)
+```
 
 ### 3. Environment
 
