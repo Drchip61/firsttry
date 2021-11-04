@@ -14,9 +14,9 @@ This repo holds code for [Sktr:Skip-Transformer Unet]
 
 当一个未捕获的异常发生时，Python将结束程序并打印一个堆栈跟踪信息，以及异常名和附加信息。具体如下：
 ```bash
-Traceback (most recent call last):&&
-File "<ipython-input-1-0bc85e309fb1>", line 1, in <module>&&
-    min(x,y)&&
+Traceback (most recent call last): &&
+File "<ipython-input-1-0bc85e309fb1>", line 1, in <module> &&
+    min(x,y) &&
 NameError: name 'x' is not defined
 ```
 
