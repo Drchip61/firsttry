@@ -237,18 +237,51 @@ assert (torch.cuda.is_available()), "本机器需要有可用的GPU才能运行�
 ```
 ### 5.Traceback用法
 
+Trachback是用来获取异常的详细信息的。
+try…except…的输出结果只能让你知道报了这个错误，却不知道在哪个文件哪个函数哪一行报的错。使用 traceback 模块可以非常清楚的了解具体错误内容在哪。
+* Python程序的traceback信息均来源于一个叫做traceback object的对象，而这个traceback object通常是通过函数sys.exc_info()来获取的。
+* sys.exc_info()获取了当前处理的exception的相关信息，并返回一个元组。
+  * 元组的第一个数据是异常的类型.
+  * 第二个返回值是异常的value值.
+  * 第三个就是我们要的traceback object.
+示例：
+```bash
+import sys
+
+def func1():
+    raise Exception("--func1 exception--")
+    
+def test():
+    try:
+        func1()
+    except Exception as e:
+        exc_type, exc_value, exc_traceback_obj = sys.exc_info()
+        print("exc_type: %s" % exc_type)
+        print("exc_value: %s" % exc_value)
+        print("exc_traceback_obj: %s" % exc_traceback_obj)
+ 
+ test()
+```
+结果：
+```bash
+exc_type: <class 'Exception'>
+exc_value: --func1 exception--
+exc_traceback_obj: <traceback object at 0x0000024D2F6A22C8>
+
+Process finished with exit code 0
+```
+
 ## Reference
-* [Google ViT](https://github.com/google-research/vision_transformer)
-* [ViT-pytorch](https://github.com/jeonsworld/ViT-pytorch)
-* [segmentation_models.pytorch](https://github.com/qubvel/segmentation_models.pytorch)
+* [怕蛇的人怎么学python](https://mp.weixin.qq.com/s?__biz=MzA4Nzg3Njg1OA==&mid=2247484069&idx=1&sn=ebb352dc62949fcbd79a397f2657b235&chksm=9033f730a7447e26bcdeb8b08834fa335c5a194f1ac0864e2ea9ff068c72fde09b32f11f2153&mpshare=1&scene=23&srcid=1019G5KQ4IZVJZC6kOJmHRhD&sharer_sharetime=1635991918869&sharer_shareid=4bbdc95dbeb4de0f49bd4127857cc1c2#rd)
+* [python raise语句详解](https://blog.csdn.net/manongajie/article/details/106288078?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522163600172016780265497497%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=163600172016780265497497&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~first_rank_ecpm_v1~rank_v31_ecpm-3-106288078.pc_search_result_hbase_insert&utm_term=raise%E6%89%8B%E5%8A%A8%E5%BC%95%E5%8F%91%E5%BC%82%E5%B8%B8&spm=1018.2226.3001.4187)
+* [Traceback异常打印](https://blog.csdn.net/aiao34980/article/details/101488938?ops_request_misc=&request_id=&biz_id=102&utm_term=traceback&utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduweb~default-0-101488938.pc_search_result_hbase_insert&spm=1018.2226.3001.4187)
 
 ## Citations
 
 ```bibtex
 @
-  title={Skip-Transformer Unet},
-  author={Tianyu Yan, Fuzi Wan},
-  journal={投哪一篇呢嘿嘿},
-  year={2021}
+  title={Python异常捕获与处理},
+  author={Tianyu Yan},
+  date={2021/11/4}
 }
 ```
